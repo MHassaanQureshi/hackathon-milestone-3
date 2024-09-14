@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const newLabel = document.createElement('label');
         newLabel.setAttribute('for', `skills-${skillCount}`);
-        newLabel.textContent = 'Skill:';
+        newLabel.textContent = 'Skills:';
 
         const newInput = document.createElement('input');
         newInput.type = 'text';
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newDiv.appendChild(removeButton);
 
         skillsContainer.appendChild(newDiv);
+
         skillCount++;
     });
 
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newDiv.setAttribute('id', `education-${educationCount}`);
 
         const programPart = document.createElement('div');
-        programPart.setAttribute('id', `program-part-${educationCount}`);
+        programPart.setAttribute('id', 'program-part');
 
         const programLabel = document.createElement('label');
         programLabel.setAttribute('for', `program-${educationCount}`);
@@ -65,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         programPart.appendChild(programInput);
 
         const schoolPart = document.createElement('div');
-        schoolPart.setAttribute('id', `school-part-${educationCount}`);
+        schoolPart.setAttribute('id', 'school-part');
 
         const schoolLabel = document.createElement('label');
         schoolLabel.setAttribute('for', `school-${educationCount}`);
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newDiv.appendChild(removeButton);
 
         educationContainer.appendChild(newDiv);
+
         educationCount++;
     });
 
@@ -117,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newDiv.setAttribute('id', `experience-${experienceCount}`);
 
         const positionPart = document.createElement('div');
-        positionPart.setAttribute('id', `experience-position-part-${experienceCount}`);
+        positionPart.setAttribute('id', 'experience-position-part');
 
         const positionLabel = document.createElement('label');
         positionLabel.setAttribute('for', `position-${experienceCount}`);
@@ -132,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         positionPart.appendChild(positionInput);
 
         const durationPart = document.createElement('div');
-        durationPart.setAttribute('id', `experience-duration-part-${experienceCount}`);
+        durationPart.setAttribute('id', 'experience-duration-part');
 
         const durationLabel = document.createElement('label');
         durationLabel.setAttribute('for', `duration-${experienceCount}`);
@@ -159,89 +161,88 @@ document.addEventListener('DOMContentLoaded', () => {
             removeButton.addEventListener('click', () => removeExperience(count));
         })(experienceCount);
 
-
         newDiv.appendChild(positionPart);
         newDiv.appendChild(durationPart);
         newDiv.appendChild(removeButton);
 
         experienceContainer.appendChild(newDiv);
+
         experienceCount++;
     });
+
     function removeExperience(id: number): void {
         const experienceToRemove = document.getElementById(`experience-${id}`);
         if (experienceToRemove) {
             experienceContainer.removeChild(experienceToRemove);
         }
     }
+// Handle CV generation
 
-    // Handle Resume Generation
-    const generateCVButton = document.getElementById('generatecv') as HTMLButtonElement;
-    const cvop = document.getElementById('cvop') as HTMLDivElement;
+    const cv = document.getElementById("cvop") as HTMLDivElement;
+    const generatebttn = document.getElementById("generatecv") as HTMLButtonElement;
 
-    generateCVButton.addEventListener('click', () => {
-        cvop.style.display = "block";
+    generatebttn.addEventListener("click", () => {
+        cv.style.display = "block";
+        
+        const username = document.getElementById("user-name") as HTMLInputElement;
+        const userrole = document.getElementById("user-role") as HTMLInputElement;
+        const usercontact = document.getElementById("user-contact") as HTMLInputElement;
+        const useremail = document.getElementById("user-email") as HTMLInputElement;
+        const useraddress = document.getElementById("user-address") as HTMLInputElement;
 
-        // Update personal details in CV
-        const userName = document.getElementById('user-name') as HTMLInputElement;
-        const userRole = document.getElementById('user-role') as HTMLInputElement;
-        const userContact = document.getElementById('user-contact') as HTMLInputElement;
-        const userEmail = document.getElementById('user-email') as HTMLInputElement;
-        const userAddress = document.getElementById('user-address') as HTMLInputElement;
+        const skillsListInCV = document.getElementById('skills-list') as HTMLUListElement;
+        const experienceListInCV = document.getElementById('experience-list') as HTMLUListElement;
+        const educationListInCV = document.getElementById('education-list') as HTMLUListElement;
 
-        document.getElementById('name-updated')!.innerText = userName.value;
-        document.getElementById('role-updated')!.innerText = userRole.value;
-        document.getElementById('number-updated')!.innerText = `Phone No: ${userContact.value}`;
-        document.getElementById('email-updated')!.innerText = `Email: ${userEmail.value}`;
-        document.getElementById('address-updated')!.innerText = `Address: ${userAddress.value}`;
-       
-        // Get and update skills
-        const skillsListInCV = document.querySelector('.skills-list2') as HTMLDivElement;
-        skillsListInCV.innerHTML = ''; // Clear existing skills
+        document.getElementById("name-updated")!.innerText = username.value;
+        document.getElementById("role-updated")!.innerText = userrole.value;
+        document.getElementById("email-updated")!.innerText = useremail.value;
+        document.getElementById("address-updated")!.innerText = useraddress.value;
+        document.getElementById("number-updated")!.innerText = usercontact.value;
 
-        const skillInputs = document.querySelectorAll('input[name="skills"]') as NodeListOf<HTMLInputElement>;
+        // Skills
+        const skillsListInCV2 = document.querySelector('#skills-container2 ul') as HTMLUListElement;
+        skillsListInCV.innerHTML = '';
+
+        const skillInputs = document.querySelectorAll('.user-skills') as NodeListOf<HTMLInputElement>;
         skillInputs.forEach(input => {
             const skillValue = input.value.trim();
             if (skillValue) {
-                const listItem = document.createElement('div');
-                listItem.textContent = skillValue;
-                skillsListInCV.appendChild(listItem);
-            }
-        });
-
-        // Get and update education
-        const educationListInCV = document.getElementById('education-list') as HTMLUListElement;
-        educationListInCV.innerHTML = ''; // Clear existing education
-
-        const educationInputs = document.querySelectorAll('.education-form') as NodeListOf<HTMLDivElement>;
-        educationInputs.forEach(div => {
-            const programInput = div.querySelector('input[name="program"]') as HTMLInputElement;
-            const schoolInput = div.querySelector('input[name="school"]') as HTMLInputElement;
-            const programValue = programInput.value.trim();
-            const schoolValue = schoolInput.value.trim();
-
-            if (programValue && schoolValue) {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${programValue} at ${schoolValue}`;
-                educationListInCV.appendChild(listItem);
+                listItem.textContent = skillValue;
+                skillsListInCV2.appendChild(listItem);
             }
         });
 
-        // Get and update experience
-        const experienceListInCV = document.getElementById('experience-list') as HTMLUListElement;
-        experienceListInCV.innerHTML = ''; // Clear existing experience
-
+        // Experience
+        experienceListInCV.innerHTML = '';
         const experienceInputs = document.querySelectorAll('.experience-form') as NodeListOf<HTMLDivElement>;
         experienceInputs.forEach(div => {
-            const positionInput = div.querySelector('input[name="position"]') as HTMLInputElement;
-            const durationInput = div.querySelector('input[name="duration"]') as HTMLInputElement;
-            const positionValue = positionInput.value.trim();
-            const durationValue = durationInput.value.trim();
-
+            const positionInput = div.querySelector('#position') as HTMLInputElement;
+            const durationInput = div.querySelector('#duration') as HTMLInputElement;
+            const positionValue = positionInput?.value.trim();
+            const durationValue = durationInput?.value.trim();
             if (positionValue && durationValue) {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${positionValue} (${durationValue})`;
+                listItem.innerHTML = `${positionValue} (${durationValue})`;
                 experienceListInCV.appendChild(listItem);
+            }
+        });
+
+        // Education
+        educationListInCV.innerHTML = '';
+        const educationInputs = document.querySelectorAll('.education-form') as NodeListOf<HTMLDivElement>;
+        educationInputs.forEach(div => {
+            const programInput = div.querySelector('#program') as HTMLInputElement;
+            const schoolInput = div.querySelector('#school') as HTMLInputElement;
+            const programValue = programInput?.value.trim();
+            const schoolValue = schoolInput?.value.trim();
+            if (programValue && schoolValue) {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `${programValue} at ${schoolValue}`;
+                educationListInCV.appendChild(listItem);
             }
         });
     });
 });
+

@@ -328,10 +328,15 @@ header{
     align-items: center;
    
 }
-.skills , .Education , .experience{
+.skills , .education-container2 , .experience{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 1rem;
+    margin-left: 2rem;
+    padding: 10px 0px;
 
+}
+.contact-align img{
+    width: 24px;
+    height: 24px;
 }

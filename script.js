@@ -1,223 +1,198 @@
-var _a;
-var addSkillButton = document.getElementById('add-skill');
-var skillsContainer = document.getElementById('skills-container');
-var skillCount = 0;
-addSkillButton.addEventListener('click', function () {
-    // Create a new div container for the skill
-    var newDiv = document.createElement('div');
-    newDiv.classList.add('skills-form');
-    newDiv.setAttribute('id', "skill-".concat(skillCount));
-    // Create a new label
-    var newLabel = document.createElement('label');
-    newLabel.setAttribute('for', "skills-".concat(skillCount));
-    newLabel.textContent = 'Skills:';
-    // Create a new input field
-    var newInput = document.createElement('input');
-    newInput.type = 'text';
-    newInput.name = 'skills';
-    newInput.id = "skills-".concat(skillCount);
-    newInput.classList.add('user-skills');
-    // Create a remove button
-    var removeButton = document.createElement('button');
-    removeButton.type = 'button';
-    removeButton.textContent = 'Remove';
-    // Use an IIFE to capture the current value of skillCount
-    (function (count) {
-        removeButton.addEventListener('click', function () { return removeSkill(count); });
-    })(skillCount);
-    // Append label, input, and remove button to the new div
-    newDiv.appendChild(newLabel);
-    newDiv.appendChild(newInput);
-    newDiv.appendChild(removeButton);
-    // Append the new div to the skills container
-    skillsContainer.appendChild(newDiv);
-    // Increment skill count
-    skillCount++;
-});
-// Function to remove a skill input box
-function removeSkill(id) {
-    var skillToRemove = document.getElementById("skill-".concat(id));
-    if (skillToRemove) {
-        skillsContainer.removeChild(skillToRemove);
+document.addEventListener('DOMContentLoaded', function () {
+    var addSkillButton = document.getElementById('add-skill');
+    var skillsContainer = document.getElementById('skills-container');
+    var skillCount = 1;
+    addSkillButton.addEventListener('click', function () {
+        var newDiv = document.createElement('div');
+        newDiv.classList.add('skills-form');
+        newDiv.setAttribute('id', "skill-".concat(skillCount));
+        var newLabel = document.createElement('label');
+        newLabel.setAttribute('for', "skills-".concat(skillCount));
+        newLabel.textContent = 'Skill:';
+        var newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = 'skills';
+        newInput.id = "skills-".concat(skillCount);
+        newInput.classList.add('user-skills');
+        var removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = 'Remove';
+        (function (count) {
+            removeButton.addEventListener('click', function () { return removeSkill(count); });
+        })(skillCount);
+        newDiv.appendChild(newLabel);
+        newDiv.appendChild(newInput);
+        newDiv.appendChild(removeButton);
+        skillsContainer.appendChild(newDiv);
+        skillCount++;
+    });
+    function removeSkill(id) {
+        var skillToRemove = document.getElementById("skill-".concat(id));
+        if (skillToRemove) {
+            skillsContainer.removeChild(skillToRemove);
+        }
     }
-}
-//handling education
-var addEducationButton = document.getElementById('add-education');
-var educationContainer = document.getElementById('Education-container');
-var educationCount = 0;
-addEducationButton.addEventListener('click', function () {
-    // Create a new div container for the education form
-    var newDiv = document.createElement('div');
-    newDiv.classList.add('education-form');
-    newDiv.setAttribute('id', "education-".concat(educationCount));
-    // Create a new div for program
-    var programPart = document.createElement('div');
-    programPart.setAttribute('id', 'program-part');
-    // Create a new label and input for program
-    var programLabel = document.createElement('label');
-    programLabel.setAttribute('for', "program-".concat(educationCount));
-    programLabel.textContent = 'Program:';
-    var programInput = document.createElement('input');
-    programInput.type = 'text';
-    programInput.name = 'program';
-    programInput.id = "program-".concat(educationCount);
-    // Append label and input to program part
-    programPart.appendChild(programLabel);
-    programPart.appendChild(programInput);
-    // Create a new div for school
-    var schoolPart = document.createElement('div');
-    schoolPart.setAttribute('id', 'school-part');
-    // Create a new label and input for school
-    var schoolLabel = document.createElement('label');
-    schoolLabel.setAttribute('for', "school-".concat(educationCount));
-    schoolLabel.textContent = 'School:';
-    var schoolInput = document.createElement('input');
-    schoolInput.type = 'text';
-    schoolInput.name = 'school';
-    schoolInput.id = "school-".concat(educationCount);
-    // Append label and input to school part
-    schoolPart.appendChild(schoolLabel);
-    schoolPart.appendChild(schoolInput);
-    // Create a remove button
-    var removeButton = document.createElement('button');
-    removeButton.type = 'button';
-    removeButton.style.width = "24px";
-    removeButton.style.height = "24px";
-    removeButton.style.backgroundImage = "url(../images/minus-sign.png)"; // Set background image
-    removeButton.style.backgroundSize = 'contain'; // Ensure image fits the button
-    removeButton.style.backgroundRepeat = 'no-repeat'; // Prevent image repetition
-    removeButton.style.border = 'none'; // Remove default border
-    removeButton.style.width = '24px'; // Set button width
-    removeButton.style.height = '24px';
-    // Use an IIFE to capture the current value of educationCount
-    (function (count) {
-        removeButton.addEventListener('click', function () { return removeEducation(count); });
-    })(educationCount);
-    // Append program part, school part, and remove button to the new div
-    newDiv.appendChild(programPart);
-    newDiv.appendChild(schoolPart);
-    newDiv.appendChild(removeButton);
-    // Append the new div to the education container
-    educationContainer.appendChild(newDiv);
-    // Increment education count
-    educationCount++;
-});
-// Function to remove an education input box
-function removeEducation(id) {
-    var educationToRemove = document.getElementById("education-".concat(id));
-    if (educationToRemove) {
-        educationContainer.removeChild(educationToRemove);
+    var addEducationButton = document.getElementById('add-education');
+    var educationContainer = document.getElementById('Education-container');
+    var educationCount = 1;
+    addEducationButton.addEventListener('click', function () {
+        var newDiv = document.createElement('div');
+        newDiv.classList.add('education-form');
+        newDiv.setAttribute('id', "education-".concat(educationCount));
+        var programPart = document.createElement('div');
+        programPart.setAttribute('id', "program-part-".concat(educationCount));
+        var programLabel = document.createElement('label');
+        programLabel.setAttribute('for', "program-".concat(educationCount));
+        programLabel.textContent = 'Program:';
+        var programInput = document.createElement('input');
+        programInput.type = 'text';
+        programInput.name = 'program';
+        programInput.id = "program-".concat(educationCount);
+        programPart.appendChild(programLabel);
+        programPart.appendChild(programInput);
+        var schoolPart = document.createElement('div');
+        schoolPart.setAttribute('id', "school-part-".concat(educationCount));
+        var schoolLabel = document.createElement('label');
+        schoolLabel.setAttribute('for', "school-".concat(educationCount));
+        schoolLabel.textContent = 'School:';
+        var schoolInput = document.createElement('input');
+        schoolInput.type = 'text';
+        schoolInput.name = 'school';
+        schoolInput.id = "school-".concat(educationCount);
+        schoolPart.appendChild(schoolLabel);
+        schoolPart.appendChild(schoolInput);
+        var removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.style.width = '24px';
+        removeButton.style.height = '24px';
+        removeButton.style.backgroundImage = "url('/images/minus-sign.png')";
+        removeButton.style.backgroundSize = 'contain';
+        removeButton.style.backgroundRepeat = 'no-repeat';
+        removeButton.style.border = 'none';
+        (function (count) {
+            removeButton.addEventListener('click', function () { return removeEducation(count); });
+        })(educationCount);
+        newDiv.appendChild(programPart);
+        newDiv.appendChild(schoolPart);
+        newDiv.appendChild(removeButton);
+        educationContainer.appendChild(newDiv);
+        educationCount++;
+    });
+    function removeEducation(id) {
+        var educationToRemove = document.getElementById("education-".concat(id));
+        if (educationToRemove) {
+            educationContainer.removeChild(educationToRemove);
+        }
     }
-}
-//handling experience
-var addExperienceButton = document.getElementById('add-experience');
-var experienceContainer = document.getElementById('Experience-container');
-var experienceCount = 0;
-addExperienceButton.addEventListener('click', function () {
-    // Create a new div container for the experience form
-    var newDiv = document.createElement('div');
-    newDiv.classList.add('experience-form');
-    newDiv.setAttribute('id', "experience-".concat(experienceCount));
-    // Create a new div for position
-    var positionPart = document.createElement('div');
-    positionPart.setAttribute('id', 'experience-position-part');
-    // Create a new label and input for position
-    var positionLabel = document.createElement('label');
-    positionLabel.setAttribute('for', "position-".concat(experienceCount));
-    positionLabel.textContent = 'Position:';
-    var positionInput = document.createElement('input');
-    positionInput.type = 'text';
-    positionInput.name = 'position';
-    positionInput.id = "position-".concat(experienceCount);
-    // Append label and input to position part
-    positionPart.appendChild(positionLabel);
-    positionPart.appendChild(positionInput);
-    // Create a new div for duration
-    var durationPart = document.createElement('div');
-    durationPart.setAttribute('id', 'experience-duration-part');
-    // Create a new label and input for duration
-    var durationLabel = document.createElement('label');
-    durationLabel.setAttribute('for', "duration-".concat(experienceCount));
-    durationLabel.textContent = 'Duration:';
-    var durationInput = document.createElement('input');
-    durationInput.type = 'text';
-    durationInput.name = 'duration';
-    durationInput.id = "duration-".concat(experienceCount);
-    // Append label and input to duration part
-    durationPart.appendChild(durationLabel);
-    durationPart.appendChild(durationInput);
-    // Create a remove button
-    var removeButton = document.createElement('button');
-    removeButton.type = 'button';
-    removeButton.style.width = "24px";
-    removeButton.style.height = "24px";
-    removeButton.style.backgroundImage = "url(../images/minus-sign.png)"; // Set background image
-    removeButton.style.backgroundSize = 'contain'; // Ensure image fits the button
-    removeButton.style.backgroundRepeat = 'no-repeat'; // Prevent image repetition
-    removeButton.style.border = 'none'; // Remove default border
-    // Use an IIFE to capture the current value of experienceCount
-    (function (count) {
-        removeButton.addEventListener('click', function () { return removeExperience(count); });
-    })(experienceCount);
-    // Append position part, duration part, and remove button to the new div
-    newDiv.appendChild(positionPart);
-    newDiv.appendChild(durationPart);
-    newDiv.appendChild(removeButton);
-    // Append the new div to the experience container
-    experienceContainer.appendChild(newDiv);
-    // Increment experience count
-    experienceCount++;
-});
-// Function to remove an experience input box
-function removeExperience(id) {
-    var experienceToRemove = document.getElementById("experience-".concat(id));
-    if (experienceToRemove) {
-        experienceContainer.removeChild(experienceToRemove);
+    var addExperienceButton = document.getElementById('add-experience');
+    var experienceContainer = document.getElementById('Experience-container');
+    var experienceCount = 1;
+    addExperienceButton.addEventListener('click', function () {
+        var newDiv = document.createElement('div');
+        newDiv.classList.add('experience-form');
+        newDiv.setAttribute('id', "experience-".concat(experienceCount));
+        var positionPart = document.createElement('div');
+        positionPart.setAttribute('id', "experience-position-part-".concat(experienceCount));
+        var positionLabel = document.createElement('label');
+        positionLabel.setAttribute('for', "position-".concat(experienceCount));
+        positionLabel.textContent = 'Position:';
+        var positionInput = document.createElement('input');
+        positionInput.type = 'text';
+        positionInput.name = 'position';
+        positionInput.id = "position-".concat(experienceCount);
+        positionPart.appendChild(positionLabel);
+        positionPart.appendChild(positionInput);
+        var durationPart = document.createElement('div');
+        durationPart.setAttribute('id', "experience-duration-part-".concat(experienceCount));
+        var durationLabel = document.createElement('label');
+        durationLabel.setAttribute('for', "duration-".concat(experienceCount));
+        durationLabel.textContent = 'Duration:';
+        var durationInput = document.createElement('input');
+        durationInput.type = 'text';
+        durationInput.name = 'duration';
+        durationInput.id = "duration-".concat(experienceCount);
+        durationPart.appendChild(durationLabel);
+        durationPart.appendChild(durationInput);
+        var removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.style.width = '24px';
+        removeButton.style.height = '24px';
+        removeButton.style.backgroundImage = "url('/images/minus-sign.png')";
+        removeButton.style.backgroundSize = 'contain';
+        removeButton.style.backgroundRepeat = 'no-repeat';
+        removeButton.style.border = 'none';
+        (function (count) {
+            removeButton.addEventListener('click', function () { return removeExperience(count); });
+        })(experienceCount);
+        newDiv.appendChild(positionPart);
+        newDiv.appendChild(durationPart);
+        newDiv.appendChild(removeButton);
+        experienceContainer.appendChild(newDiv);
+        experienceCount++;
+    });
+    function removeExperience(id) {
+        var experienceToRemove = document.getElementById("experience-".concat(id));
+        if (experienceToRemove) {
+            experienceContainer.removeChild(experienceToRemove);
+        }
     }
-}
-console.log('Script Loaded');
-(_a = document.getElementById('file-upload')) === null || _a === void 0 ? void 0 : _a.addEventListener('change', function (event) {
-    var _a;
-    var input = event.target;
-    var file = (_a = input.files) === null || _a === void 0 ? void 0 : _a[0];
-    if (file && file.type.startsWith('image/')) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            var _a;
-            var img = document.getElementById('preview');
-            if ((_a = e.target) === null || _a === void 0 ? void 0 : _a.result) {
-                img.src = e.target.result;
-                img.style.display = 'block';
+    // Handle Resume Generation
+    var generateCVButton = document.getElementById('generatecv');
+    var cvop = document.getElementById('cvop');
+    generateCVButton.addEventListener('click', function () {
+        cvop.style.display = "block";
+        // Update personal details in CV
+        var userName = document.getElementById('user-name');
+        var userRole = document.getElementById('user-role');
+        var userContact = document.getElementById('user-contact');
+        var userEmail = document.getElementById('user-email');
+        var userAddress = document.getElementById('user-address');
+        document.getElementById('name-updated').innerText = userName.value;
+        document.getElementById('role-updated').innerText = userRole.value;
+        document.getElementById('number-updated').innerText = "Phone No: ".concat(userContact.value);
+        document.getElementById('email-updated').innerText = "Email: ".concat(userEmail.value);
+        document.getElementById('address-updated').innerText = "Address: ".concat(userAddress.value);
+        // Get and update skills
+        var skillsListInCV = document.querySelector('.skills-list2');
+        skillsListInCV.innerHTML = ''; // Clear existing skills
+        var skillInputs = document.querySelectorAll('input[name="skills"]');
+        skillInputs.forEach(function (input) {
+            var skillValue = input.value.trim();
+            if (skillValue) {
+                var listItem = document.createElement('div');
+                listItem.textContent = skillValue;
+                skillsListInCV.appendChild(listItem);
             }
-        };
-        reader.readAsDataURL(file);
-    }
-});
-var username = document.getElementById("user-name");
-var userrole = document.getElementById("user-role");
-var usercontact = document.getElementById("user-contact");
-var useremail = document.getElementById("user-email");
-var useraddress = document.getElementById("user-address");
-var userskills = document.getElementById("user-skills");
-var userprogram = document.getElementById("user-program");
-var userschool = document.getElementById("user-school");
-var userposition = document.getElementById("user-position");
-var userduration = document.getElementById("user-duration");
-var updatename = document.getElementById("name-updated");
-var updaterole = document.getElementById("role-updated");
-var updateemail = document.getElementById("email-updated");
-var updatenumber = document.getElementById("number-updated");
-var updateaddress = document.getElementById("address-updated");
-document.addEventListener("DOMContentLoaded", function () {
-    var cv = document.getElementById("cvop");
-    var generatebttn = document.getElementById("generatecv");
-    generatebttn.addEventListener("click", function () {
-        console.log("show cv");
-        cv.style.display = "block";
-        updatename.innerHTML = username.value;
-        updaterole.innerHTML = userrole.value;
-        updateemail.innerHTML = useremail.value;
-        updateaddress.innerHTML = useraddress.value;
-        updatenumber.innerHTML = usercontact.value;
+        });
+        // Get and update education
+        var educationListInCV = document.getElementById('education-list');
+        educationListInCV.innerHTML = ''; // Clear existing education
+        var educationInputs = document.querySelectorAll('.education-form');
+        educationInputs.forEach(function (div) {
+            var programInput = div.querySelector('input[name="program"]');
+            var schoolInput = div.querySelector('input[name="school"]');
+            var programValue = programInput.value.trim();
+            var schoolValue = schoolInput.value.trim();
+            if (programValue && schoolValue) {
+                var listItem = document.createElement('li');
+                listItem.textContent = "".concat(programValue, " at ").concat(schoolValue);
+                educationListInCV.appendChild(listItem);
+            }
+        });
+        // Get and update experience
+        var experienceListInCV = document.getElementById('experience-list');
+        experienceListInCV.innerHTML = ''; // Clear existing experience
+        var experienceInputs = document.querySelectorAll('.experience-form');
+        experienceInputs.forEach(function (div) {
+            var positionInput = div.querySelector('input[name="position"]');
+            var durationInput = div.querySelector('input[name="duration"]');
+            var positionValue = positionInput.value.trim();
+            var durationValue = durationInput.value.trim();
+            if (positionValue && durationValue) {
+                var listItem = document.createElement('li');
+                listItem.textContent = "".concat(positionValue, " (").concat(durationValue, ")");
+                experienceListInCV.appendChild(listItem);
+            }
+        });
     });
 });
